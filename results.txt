@@ -1,0 +1,97 @@
+==========Classification Report for Vanilla:==========
+              precision    recall  f1-score   support
+
+         0.0       0.46      0.74      0.57       674
+         1.0       0.58      0.29      0.38       829
+
+   micro avg       0.49      0.49      0.49      1503
+   macro avg       0.52      0.52      0.48      1503
+weighted avg       0.53      0.49      0.47      1503
+
+==========Accuracy Report for Vanilla:==========
+0.4916833000665336
+
+
+
+
+
+==========Classification Report for GRU:==========
+              precision    recall  f1-score   support
+
+         0.0       0.43      0.08      0.13       674
+         1.0       0.55      0.92      0.69       829
+
+   micro avg       0.54      0.54      0.54      1503
+   macro avg       0.49      0.50      0.41      1503
+weighted avg       0.50      0.54      0.44      1503
+
+==========Accuracy Report for GRU:==========
+0.5402528276779773
+
+
+
+
+
+==========Classification Report for LSTM:==========
+              precision    recall  f1-score   support
+
+         0.0       0.42      0.20      0.27       674
+         1.0       0.54      0.78      0.64       829
+
+   micro avg       0.52      0.52      0.52      1503
+   macro avg       0.48      0.49      0.46      1503
+weighted avg       0.49      0.52      0.48      1503
+
+==========Accuracy Report for LSTM:==========
+0.5189620758483033
+
+
+
+
+
+==========Classification Report for XGBoost:==========
+              precision    recall  f1-score   support
+
+         0.0       0.45      0.44      0.45       674
+         1.0       0.55      0.56      0.56       829
+
+   micro avg       0.51      0.51      0.51      1503
+   macro avg       0.50      0.50      0.50      1503
+weighted avg       0.51      0.51      0.51      1503
+
+==========Accuracy Report for XGBoost:==========
+0.5089820359281437
+
+
+
+
+
+==========Classification Report for LGBM:==========
+              precision    recall  f1-score   support
+
+         0.0       0.45      0.68      0.54       674
+         1.0       0.55      0.33      0.41       829
+
+   micro avg       0.48      0.48      0.48      1503
+   macro avg       0.50      0.50      0.47      1503
+weighted avg       0.51      0.48      0.47      1503
+
+==========Accuracy Report for LGBM:==========
+0.4823685961410512
+
+
+
+
+
+==========Classification Report for Ensemble:==========
+              precision    recall  f1-score   support
+
+         0.0       0.47      0.15      0.22       674
+         1.0       0.56      0.87      0.68       829
+
+   micro avg       0.54      0.54      0.54      1503
+   macro avg       0.51      0.51      0.45      1503
+weighted avg       0.52      0.54      0.47      1503
+
+==========Accuracy Report for Ensemble:==========
+0.5442448436460412
