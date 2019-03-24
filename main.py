@@ -4,6 +4,8 @@ import gc
 import tensorflow as tf
 import xgboost as xgb
 import lightgbm as lgb
+import collections
+import operator
 
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
@@ -208,7 +210,7 @@ def main():
     callbacks_list = []
     early_stopping = dict(monitor='val_loss', patience=1, min_delta=0.001, verbose=1)
     model_checkpoint = dict(filepath='./weights/{val_loss:.5f}_{epoch:04d}.weights.h5',
-                            save_best_only=False,
+                            save_best_only=True,
                             save_weights_only=True,
                             mode='auto',
                             period=1,
@@ -244,13 +246,12 @@ def main():
 
     Y_vanilla_pred = vanilla_model.predict(X_test)
     Y_vanilla_pred = [1 if i >= 0.5 else 0 for i in Y_vanilla_pred]
-    
+
     print("="*10 + "Classification Report for Vanilla:" + "="*10)
     print(classification_report(Y_test, Y_vanilla_pred))
 
     print("="*10 + "Accuracy Report for Vanilla:" + "="*10)
     print(accuracy_score(Y_test, Y_vanilla_pred))
-
     print()
 
     ###### GRU Model
@@ -380,6 +381,29 @@ def main():
     print("="*10 + "Accuracy Report for Ensemble:" + "="*10)
     print(accuracy_score(Y_test, Y_pred))
 
+    # Performance on full dataset
+    test_size = Y.shape[0]
+
+    Y_vanilla_pred = vanilla_model.predict(X)
+    Y_vanilla_pred = [1 if i >= 0.5 else 0 for i in Y_vanilla_pred]
+
+    Y_gru_pred = gru_model.predict(X)
+    Y_gru_pred = [1 if i >= 0.5 else 0 for i in Y_gru_pred]
+
+    Y_lstm_pred = lstm_model.predict(X)
+    Y_lstm_pred = [1 if i >= 0.5 else 0 for i in Y_lstm_pred]
+
+    X_stacked = X.reshape(*X.shape[:1], -1)
+    Y_xgb_pred = xgb_model.predict(X_stacked)
+
+    Y_pred = [1 if sum([Y_gru_pred[i], Y_lstm_pred[i], Y_xgb_pred[i]]) > 1 else 0 for i in range(test_size)]
+
+    print()
+    print("="*10 + "Full Classification Report for Ensemble:" + "="*10)
+    print(classification_report(Y, Y_pred))
+
+    print("="*10 + "Full Accuracy Report for Ensemble:" + "="*10)
+    print(accuracy_score(Y, Y_pred))
 #end def
 
 if __name__ == '__main__': main()
