@@ -381,29 +381,36 @@ def main():
     print("="*10 + "Accuracy Report for Ensemble:" + "="*10)
     print(accuracy_score(Y_test, Y_pred))
 
-    # Performance on full dataset
-    test_size = Y.shape[0]
+    # Y_pred = [1 for i in range(test_size)]
+    # print("="*10 + "Classification Report for Ensemble:" + "="*10)
+    # print(classification_report(Y_test, Y_pred))
 
-    Y_vanilla_pred = vanilla_model.predict(X)
-    Y_vanilla_pred = [1 if i >= 0.5 else 0 for i in Y_vanilla_pred]
+    # print("="*10 + "Accuracy Report for Ensemble:" + "="*10)
+    # print(accuracy_score(Y_test, Y_pred))
 
-    Y_gru_pred = gru_model.predict(X)
-    Y_gru_pred = [1 if i >= 0.5 else 0 for i in Y_gru_pred]
+    # # Performance on full dataset
+    # test_size = Y.shape[0]
 
-    Y_lstm_pred = lstm_model.predict(X)
-    Y_lstm_pred = [1 if i >= 0.5 else 0 for i in Y_lstm_pred]
+    # Y_vanilla_pred = vanilla_model.predict(X)
+    # Y_vanilla_pred = [1 if i >= 0.5 else 0 for i in Y_vanilla_pred]
 
-    X_stacked = X.reshape(*X.shape[:1], -1)
-    Y_xgb_pred = xgb_model.predict(X_stacked)
+    # Y_gru_pred = gru_model.predict(X)
+    # Y_gru_pred = [1 if i >= 0.5 else 0 for i in Y_gru_pred]
 
-    Y_pred = [1 if sum([Y_gru_pred[i], Y_lstm_pred[i], Y_xgb_pred[i]]) > 1 else 0 for i in range(test_size)]
+    # Y_lstm_pred = lstm_model.predict(X)
+    # Y_lstm_pred = [1 if i >= 0.5 else 0 for i in Y_lstm_pred]
 
-    print()
-    print("="*10 + "Full Classification Report for Ensemble:" + "="*10)
-    print(classification_report(Y, Y_pred))
+    # X_stacked = X.reshape(*X.shape[:1], -1)
+    # Y_xgb_pred = xgb_model.predict(X_stacked)
 
-    print("="*10 + "Full Accuracy Report for Ensemble:" + "="*10)
-    print(accuracy_score(Y, Y_pred))
+    # Y_pred = [1 if sum([Y_gru_pred[i], Y_lstm_pred[i], Y_xgb_pred[i]]) > 1 else 0 for i in range(test_size)]
+
+    # print()
+    # print("="*10 + "Full Classification Report for Ensemble:" + "="*10)
+    # print(classification_report(Y, Y_pred))
+
+    # print("="*10 + "Full Accuracy Report for Ensemble:" + "="*10)
+    # print(accuracy_score(Y, Y_pred))
 #end def
 
 if __name__ == '__main__': main()
